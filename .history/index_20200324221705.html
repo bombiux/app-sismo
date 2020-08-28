@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <title>APP DE SISMOS</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css'>
+    <script defer src='https://use.fontawesome.com/releases/v5.1.0/js/all.js'></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet' >
+    <script src='/jquery.js'></script>
+    <script type='module' src='/app.js'></script>
+    <style>
+        body {
+          margin: 0;
+          padding: 0;
+        }
+  
+        #map {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          width: 100%;
+        }
+        .marker {
+        background-image: url('mapbox-icon.png');
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        }
+      </style>
+</head>
+
+<body>
+    <div id='header_container'></div>
+
+    <div id='page_container' class='container pageEntry' >
+        <article> Loading....</article>
+    </div>
+
+    <div id='footer_container'></div>
+</body>
+    
+</html>

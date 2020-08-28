@@ -1,0 +1,78 @@
+let getPostsList = async () => {
+     const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    try {
+        const response = await $.getJSON('http://whateverorigin.org/get?url=' + encodeURIComponent('https://webserver2.ineter.gob.ni/geofisica/sis/events/sismos.php') + '&callback=?',
+
+        function(data) {
+
+            let my
+            data = data.contents;
+            
+            data = $('pre', data);
+
+            let count = 0;
+
+            for (let el of data) {
+                if (el.innerText.slice(-9) == 'Nicaragua') {
+                    
+                    el = el.innerText.split(' ');
+                    
+                    el = el.filter(function (el) {
+                        return el != '';
+                    })
+                    
+                    let tempObj = {};
+
+                    tempObj.id = count;
+                    count++;
+
+                    tempObj.fecha = el[0] + ' ' + el[1];
+
+                    tempObj.coord = el[2] + ' ' + el[3];
+                    
+                    tempObj.prof = el[4];
+
+                    tempObj.magn = el[5];
+
+                    tempObj.dir = el.slice(7, el.length).join(' ');
+
+                    myObj.push(tempObj);
+                    
+                }
+            }
+
+        });
+        const json = await response.json();
+        return json
+    } catch (err) {
+        console.log('Error getting documents', err)
+    }
+}
+
+let Home = {
+    render : async () => {
+        let posts = await getPostsList()
+        let view =  `
+            <section class="section">
+                <h1> Home </h1>
+                <ul>
+                    ${ posts.map(post => 
+                        `<li><a href="#/p/${post.id}">${post.dir}</a></li>`
+                        ).join('\n ')
+                    }
+                </ul>
+            </section>
+        `
+        return view
+    }
+    , after_render: async () => {
+    }
+
+}
+
+export default Home;
